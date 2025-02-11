@@ -54,12 +54,12 @@ Armazena informações sobre os dependentes dos funcionários.
 ---
 
 ## ✅ Regras de Integridade e Relacionamentos
-✔️ Cada funcionário pertence a um **departamento**.
-✔️ Cada departamento pode ter **múltiplos locais de operação**.
-✔️ Cada funcionário pode trabalhar em **múltiplos projetos**, e cada projeto pode ter **múltiplos funcionários**.
-✔️ Cada projeto está associado a um **único departamento**.
-✔️ Cada funcionário pode ter **dependentes**.
-✔️ `ON DELETE CASCADE` foi aplicado para evitar registros órfãos nas tabelas dependentes.
+✔️ Cada funcionário pertence a um **departamento**.  
+✔️ Cada departamento pode ter **múltiplos locais de operação**.  
+✔️ Cada funcionário pode trabalhar em **múltiplos projetos**, e cada projeto pode ter **múltiplos funcionários**.  
+✔️ Cada projeto está associado a um **único departamento**.  
+✔️ Cada funcionário pode ter **dependentes**.  
+✔️ `ON DELETE CASCADE` foi aplicado para evitar registros órfãos nas tabelas dependentes.  
 ✔️ `ON DELETE SET NULL` foi aplicado para gerentes e supervisores, evitando inconsistências.
 
 ---
@@ -78,38 +78,59 @@ Armazena informações sobre os dependentes dos funcionários.
 ## 🚀 Índices Criados
 Para otimizar as consultas, foram criados os seguintes índices:
 
-🔹 **`idx_employee_dno`** *(employee.Dno)*
-   - ✅ Otimiza a contagem de funcionários por departamento.
-   - ✅ Melhora a performance de junções entre `employee` e `department`.
+🔹 **`idx_employee_dno`** *(employee.Dno)*  
+   - ✅ Otimiza a contagem de funcionários por departamento.  
+   - ✅ Melhora a performance de junções entre `employee` e `department`.  
 
-🔹 **`idx_department_dnumber`** *(department.Dnumber)*
-   - ✅ Facilita a junção entre `department` e `dept_locations`.
-   - ✅ Melhora a performance de consultas relacionadas a departamentos.
+🔹 **`idx_department_dnumber`** *(department.Dnumber)*  
+   - ✅ Facilita a junção entre `department` e `dept_locations`.  
+   - ✅ Melhora a performance de consultas relacionadas a departamentos.  
 
-🔹 **`idx_dept_locations_dnumber`** *(dept_locations.Dnumber)*
-   - ✅ Acelera a correspondência entre `department` e `dept_locations`.
+🔹 **`idx_dept_locations_dnumber`** *(dept_locations.Dnumber)*  
+   - ✅ Acelera a correspondência entre `department` e `dept_locations`.  
 
-🔹 **`idx_dept_locations_dlocation`** *(dept_locations.Dlocation)*
-   - ✅ Melhora a ordenação por cidade *(ORDER BY dl.Dlocation)*.
+🔹 **`idx_dept_locations_dlocation`** *(dept_locations.Dlocation)*  
+   - ✅ Melhora a ordenação por cidade *(ORDER BY dl.Dlocation)*.  
 
-🔹 **`idx_department_dname`** *(department.Dname)*
+🔹 **`idx_department_dname`** *(department.Dname)*  
    - ✅ Acelera a ordenação por nome do departamento *(ORDER BY d.Dname)*.
 
 Esses índices ajudam a reduzir o tempo de execução das consultas e melhoram a escalabilidade do banco de dados.
 
 ---
 
+## 🛠️ Views Criadas
+
+As seguintes **views** foram criadas para facilitar o acesso aos dados de forma personalizada e otimizada:
+
+### 🔹 1. **`emp_dept_location`** - Número de empregados por departamento e localidade  
+Exibe o número de empregados por departamento e localidade. Esta view é útil para analisar a distribuição de funcionários em diferentes locais e departamentos da organização.
+
+### 🔹 2. **`dept_managers`** - Lista de departamentos e seus gerentes  
+Exibe os departamentos e seus respectivos gerentes. Permite visualizar quais funcionários são responsáveis pela gestão de cada departamento.
+
+### 🔹 3. **`projects_with_employees`** - Projetos com maior número de empregados (ordenados de forma decrescente)  
+Exibe os projetos e o número de empregados que trabalham neles, ordenados de forma decrescente com base no número de empregados. Ideal para identificar os projetos com maior equipe.
+
+### 🔹 4. **`project_dept_managers`** - Lista de projetos, departamentos e gerentes  
+Exibe os projetos, o departamento responsável e o gerente desse departamento. Fornece uma visão clara da relação entre projetos e suas respectivas equipes de gestão.
+
+### 🔹 5. **`emp_with_dependents_and_managers`** - Empregados com dependentes e se são gerentes  
+Exibe os empregados, o número de dependentes e se são gerentes de departamento. Essa view ajuda a identificar quais funcionários têm dependentes e ocupam posições de liderança.
+
+---
+
 ## 🔧 Procedures para Manipulação de Dados
 Foram criadas **procedures** para facilitar a manipulação dos dados, incluindo operações de **SELECT, INSERT, UPDATE e DELETE**.
 
-Duas versões do script foram desenvolvidas:
-1️⃣ **Procedures para Banco de Dados da Universidade**
+Duas versões do script foram desenvolvidas:  
+1️⃣ **Procedures para Banco de Dados da Universidade**  
 2️⃣ **Procedures para Banco de Dados do E-commerce**
 
-Cada procedure possui uma variável de controle que define a operação desejada:
-- **1 → SELECT**
-- **2 → INSERT**
-- **3 → UPDATE**
+Cada procedure possui uma variável de controle que define a operação desejada:  
+- **1 → SELECT**  
+- **2 → INSERT**  
+- **3 → UPDATE**  
 - **4 → DELETE**
 
 Essas procedures garantem que as operações de manipulação sejam realizadas de forma segura e eficiente, reduzindo a redundância de código e melhorando a manutenção do banco de dados.
@@ -117,12 +138,11 @@ Essas procedures garantem que as operações de manipulação sejam realizadas d
 ---
 
 ## 🌟 Melhorias Futuras
-🔹 Implementar tabelas adicionais para **benefícios** e **cargos dos funcionários**.
-🔹 Criar **stored procedures** para operações comuns, como **promoção de funcionários**.
+🔹 Implementar tabelas adicionais para **benefícios** e **cargos dos funcionários**.  
+🔹 Criar **stored procedures** para operações comuns, como **promoção de funcionários**.  
 🔹 Adicionar **constraints** e **triggers** para maior controle dos dados.
 
 ---
 
 ## 👨‍💻 Autor
 Este banco de dados foi modelado para fins **acadêmicos e profissionais**, seguindo boas práticas de **modelagem relacional**. 💡📊
-
