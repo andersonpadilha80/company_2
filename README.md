@@ -123,14 +123,14 @@ Exibe os empregados, o número de dependentes e se são gerentes de departamento
 Foram criadas procedures para facilitar a manipulação dos dados, incluindo operações de SELECT, INSERT, UPDATE e DELETE.
 
 Duas versões do script foram desenvolvidas:
-1️⃣ Procedures para Banco de Dados da Universidade
+1️⃣ Procedures para Banco de Dados da Universidade  
 2️⃣ Procedures para Banco de Dados do E-commerce
 
 Cada procedure possui uma variável de controle que define a operação desejada:
 
-1 → SELECT
-2 → INSERT
-3 → UPDATE
+1 → SELECT  
+2 → INSERT  
+3 → UPDATE  
 4 → DELETE
 
 Essas procedures garantem que as operações de manipulação sejam realizadas de forma segura e eficiente, reduzindo a redundância de código e melhorando a manutenção do banco de dados.
@@ -152,11 +152,17 @@ Após configurar as permissões, foram realizados testes para verificar se o usu
 
 Essas medidas ajudam a manter a segurança do banco de dados, garantindo que os usuários tenham apenas as permissões necessárias para suas funções, evitando o risco de alterações indesejadas ou acesso a dados confidenciais.
 
-## 🌟 Melhorias Futuras
-- 🔹 Implementar tabelas adicionais para benefícios e cargos dos funcionários.
-- 🔹 Criar stored procedures para operações comuns, como promoção de funcionários.
-- 🔹 Adicionar constraints e triggers para maior controle dos dados.
+## 🛠️ Criação de Triggers
 
-## 👨‍💻 Autor
-Este banco de dados foi modelado para fins acadêmicos e profissionais, seguindo boas práticas de modelagem relacional. 💡📊
+O banco de dados também conta com **triggers** que ajudam a manter a integridade dos dados ao realizar alterações importantes, como exclusões e atualizações de dados. O propósito das triggers é garantir que informações essenciais sejam preservadas no banco de dados, mesmo quando registros são removidos ou modificados.
 
+### 1. **Trigger de Remoção de Clientes**
+Esta trigger é ativada antes da exclusão de um cliente da tabela `clients`. Antes de remover o cliente, as informações são copiadas para as tabelas de histórico (`client_history`, `client_history_pf`, `client_history_pj`). Isso garante que dados históricos do cliente não sejam perdidos permanentemente.
+
+### 2. **Trigger de Atualização de Salário dos Colaboradores**
+Antes de atualizar o salário de um colaborador na tabela `employees`, esta trigger armazena o valor anterior na tabela `salary_history`. Isso cria um histórico das alterações salariais, o que é importante para fins de auditoria e análise.
+
+### 3. **Trigger de Atualização de Colaboradores**
+Esta trigger registra mudanças nos dados dos colaboradores, como alteração de cargo ou status, na tabela `employee_history`. Antes da atualização dos dados, as informações anteriores (cargo e status) são preservadas, permitindo rastrear mudanças ao longo do tempo.
+
+Essas triggers são vitais para o controle e manutenção da integridade histórica dos dados, permitindo uma fácil auditoria e evitando perda de informações sensíveis.
