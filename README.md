@@ -99,10 +99,20 @@ Esses índices ajudam a reduzir o tempo de execução das consultas e melhoram a
 
 ---
 
-## 🔧 Como Utilizar
-1️⃣ Execute o script SQL para **criar o banco de dados e as tabelas**.
-2️⃣ O script já contém **dados pré-carregados**. Caso queira adicionar mais informações, utilize comandos `INSERT INTO` conforme necessário.
-3️⃣ Utilize **consultas SQL** para gerenciar os dados conforme necessário.
+## 🔧 Procedures para Manipulação de Dados
+Foram criadas **procedures** para facilitar a manipulação dos dados, incluindo operações de **SELECT, INSERT, UPDATE e DELETE**.
+
+Duas versões do script foram desenvolvidas:
+1️⃣ **Procedures para Banco de Dados da Universidade**
+2️⃣ **Procedures para Banco de Dados do E-commerce**
+
+Cada procedure possui uma variável de controle que define a operação desejada:
+- **1 → SELECT**
+- **2 → INSERT**
+- **3 → UPDATE**
+- **4 → DELETE**
+
+Essas procedures garantem que as operações de manipulação sejam realizadas de forma segura e eficiente, reduzindo a redundância de código e melhorando a manutenção do banco de dados.
 
 ---
 
